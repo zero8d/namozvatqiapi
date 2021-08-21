@@ -2,9 +2,9 @@
   "name": "namoztimesfromdb",
   "version": "1.0.0",
   "description": "API for prayer times",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
   "author": "Zero8D",
   "license": "ISC",

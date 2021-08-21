@@ -22,12 +22,14 @@ app.get("/", (req, res) => {
 })
 
 app.get("/api/monthly", async (req, res) => {
-  const { region, month } = req.body
+  let { region, month } = req.body
   if (!region || !month) {
     res.status(403)
     res.json({ message: "Bad request" })
     return
   }
+  let region = capitalize(region)
+  month = Number(month)
   const resData = await TaqvimModel.find(
     { region: region, month: month },
     { _id: 0, __v: 0 }
@@ -36,17 +38,25 @@ app.get("/api/monthly", async (req, res) => {
 })
 
 app.get("/api/daily", async (req, res) => {
-  const { region, month, day } = req.body
+  let { region, month, day } = req.body
+
   if (!region || !month || !day) {
     res.status(403)
     res.json({ message: "Bad request" })
     return
   }
+  month = Number(month)
+  day = Number(day)
+  region = capitalize(region)
   const resData = await TaqvimModel.findOne(
     { region, month, day },
     { _id: 0, __v: 0 }
   )
   res.json(resData)
 })
+
+function capitalize(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
+}
 
 app.listen(port)
