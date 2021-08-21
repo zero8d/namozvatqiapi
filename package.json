@@ -12,7 +12,5 @@
     "express": "^4.17.1",
     "mongoose": "^5.13.7"
   },
-  "devDependencies": {
-    "dotenv": "^10.0.0"
-  }
+  "devDependencies": {}
 }

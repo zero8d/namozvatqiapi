@@ -1,9 +1,7 @@
-require("dotenv").config()
 const express = require("express")
 const mongoose = require("mongoose")
 const connectionString = process.env.CONNECTION_STRING
 const port = process.env.PORT
-
 const TaqvimModel = require("./models/taqvim")
 const app = express()
 
