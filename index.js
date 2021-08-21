@@ -28,7 +28,7 @@ app.get("/api/monthly", async (req, res) => {
     res.json({ message: "Bad request" })
     return
   }
-  let region = capitalize(region)
+  region = capitalize(region)
   month = Number(month)
   const resData = await TaqvimModel.find(
     { region: region, month: month },
