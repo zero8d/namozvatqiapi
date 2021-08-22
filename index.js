@@ -21,7 +21,12 @@ app.get("/", (req, res) => {
 
 app.get("/api/monthly", async (req, res) => {
   let { region, month } = req.body
+
   if (!region || !month) {
+    if (!region && !month) {
+      res.status(403)
+      res.send("You must provide region and month data as json request body")
+    }
     res.status(403)
     res.json({ message: "Bad request" })
     return
@@ -39,6 +44,10 @@ app.get("/api/daily", async (req, res) => {
   let { region, month, day } = req.body
 
   if (!region || !month || !day) {
+    if (!region && !month && !day) {
+      res.status(403)
+      res.send("You must provide region and month data as json request body")
+    }
     res.status(403)
     res.json({ message: "Bad request" })
     return
