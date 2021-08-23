@@ -1,3 +1,4 @@
+require("dotenv").config()
 const express = require("express")
 const mongoose = require("mongoose")
 const connectionString = process.env.CONNECTION_STRING
@@ -6,7 +7,7 @@ const TaqvimModel = require("./models/taqvim")
 const app = express()
 
 app.use(express.json())
-
+app.use(express.urlencoded({ extended: true }))
 mongoose.connect(connectionString, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -20,17 +21,22 @@ app.get("/", (req, res) => {
 })
 
 app.get("/api/monthly", async (req, res) => {
-  let { region, month } = req.body
-
-  if (!region || !month) {
-    if (!region && !month) {
-      res.status(403)
-      res.send("You must provide region and month data as json request body")
-    }
+  if (!req.body.region && !req.query.region) {
     res.status(403)
-    res.json({ message: "Bad request" })
-    return
+    return res.json({
+      status: "error",
+      message: "Bad request. You must provide region value",
+    })
   }
+  if (!req.body.month && !req.query.month) {
+    res.status(403)
+    return res.json({
+      status: "error",
+      message: "Bad request. You must provide valid month value",
+    })
+  }
+  let region = req.body.region ?? req.query.region
+  let month = req.body.month ?? req.query.month
   region = capitalize(region)
   month = Number(month)
   const resData = await TaqvimModel.find(
@@ -41,17 +47,19 @@ app.get("/api/monthly", async (req, res) => {
 })
 
 app.get("/api/daily", async (req, res) => {
-  let { region, month, day } = req.body
-
-  if (!region || !month || !day) {
-    if (!region && !month && !day) {
-      res.status(403)
-      res.send("You must provide region and month data as json request body")
-    }
+  if (
+    (!req.body.region && !req.query.region) ||
+    (!req.body.month && !req.query.month) ||
+    (!req.body.day && !req.query.day)
+  ) {
     res.status(403)
-    res.json({ message: "Bad request" })
-    return
+    return res.send(
+      "You must provide valid region and month value on json/www-url-encoded request body or in query"
+    )
   }
+  let region = req.body.region ?? req.query.region
+  let month = req.body.month ?? req.query.month
+  let day = req.body.day ?? req.query.day
   month = Number(month)
   day = Number(day)
   region = capitalize(region)

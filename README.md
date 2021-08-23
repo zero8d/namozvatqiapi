@@ -1,7 +1,7 @@
-# Namoz Vaqtlari API
+# Namoz Vaqti API
 
 Namoz vaqtlarini bilish mumkin bo'lgan API. Ma'lumotlar islom.uz saytidan olingan.
-Serverga request ni json shaklida jo'nating
+Serverga request ni json shaklida jo'nating.
 
 | API Endpoints  | description                                              |
 | -------------- | -------------------------------------------------------- |
