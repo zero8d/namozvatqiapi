@@ -11,7 +11,6 @@ router.get("/week", async (req, res) => {
   }
   let region = req.body.region ?? req.query.region
   let now = DateTime.now()
-  let month = now.toObject().month
   let from_date = now.startOf("week").toISODate()
   let to_date = now.endOf("week").toISODate()
   try {
