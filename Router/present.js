@@ -44,24 +44,22 @@ router.get("/day", async (req, res) => {
       "You must provide valid region and month value on json/www-url-encoded request body or in query"
     )
   }
-  let region = req.body.region ?? req.query.region
+  const region = req.body.region ?? req.query.region
   try {
     let date = DateTime.now().toISODate()
-    let { region, date, month, weekday, hijri_date, times } =
-      await TaqvimModel.findOne(
-        {
-          region,
-          date,
-        },
-        { _id: 0, __v: 0, month: 0, day: 0 }
-      )
+    let dbData = await TaqvimModel.findOne(
+      {
+        region,
+        date,
+      },
+      { _id: 0, __v: 0, month: 0, day: 0 }
+    )
     let resonse = {
-      region,
+      region: dbData.region,
       date: date.toLocaleString("uz-UZ"),
-      month,
-      weekday,
-      hijri_date,
-      times,
+      weekday: dbData.weekday,
+      hijri_date: dbData.hijri_date,
+      times: dbData.times,
     }
     res.json(resonse)
   } catch (error) {}
