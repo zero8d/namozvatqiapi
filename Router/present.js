@@ -14,7 +14,6 @@ router.get("/week", async (req, res) => {
   let month = now.toObject().month
   let from_date = now.startOf("week").toISODate()
   let to_date = now.endOf("week").toISODate()
-  console.log(from_date)
   try {
     let data = await TaqvimModel.find(
       {
@@ -39,7 +38,7 @@ router.get("/week", async (req, res) => {
     res.json(err.message)
   }
 })
-router.get("day", async (req, res) => {
+router.get("/day", async (req, res) => {
   if (!req.body.region && !req.query.region) {
     res.status(403)
     return res.send(
