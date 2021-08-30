@@ -23,10 +23,11 @@ const hijri = new Schema(
 
 const taqvim = new Schema({
   region: String,
+  date: Date,
   month: Number,
   day: Number,
-  dayofweek: String,
-  hijri_date: hijri,
+  weekday: String,
+  hijri_date: String,
   times: timeSchema,
 })
 
