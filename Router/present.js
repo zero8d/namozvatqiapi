@@ -22,7 +22,6 @@ router.get("/week", async (req, res) => {
       },
       { _id: 0, __v: 0, month: 0, day: 0 }
     )
-    console.log(data)
     let resData = data.map(({ weekday, date, times, region, hijri_date }) => {
       return {
         region,
@@ -51,7 +50,7 @@ router.get("/day", async (req, res) => {
     let data = await TaqvimModel.find(
       {
         region: region,
-        date: date,
+        date: date.toLocaleString("uz-UZ"),
       },
       { _id: 0, __v: 0, month: 0, day: 0 }
     )
