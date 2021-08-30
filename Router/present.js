@@ -45,13 +45,13 @@ router.get("/day", async (req, res) => {
     )
   }
   let region = req.body.region ?? req.query.region
-  let date = DateTime.now().toISODate()
   try {
+    let date = DateTime.now().toISODate()
     let { region, date, month, weekday, hijri_date, times } =
       await TaqvimModel.findOne(
         {
-          region: region,
-          date: date.toLocaleString("uz-UZ"),
+          region,
+          date,
         },
         { _id: 0, __v: 0, month: 0, day: 0 }
       )
@@ -63,7 +63,7 @@ router.get("/day", async (req, res) => {
       hijri_date,
       times,
     }
-    res.json(data)
+    res.json(resonse)
   } catch (error) {}
 })
 
