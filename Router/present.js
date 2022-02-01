@@ -61,7 +61,7 @@ router.get("/day", async (req, res) => {
       times: dbData.times,
     }
     res.json(resonse)
-  } catch (error) {}
+  } catch (error) {console.log(JSON.stringify(error)}
 })
 
 module.exports = router
