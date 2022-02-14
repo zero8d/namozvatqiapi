@@ -1,13 +1,14 @@
-require("dotenv").config()
-const express = require("express")
-const mongoose = require("mongoose")
+require('dotenv').config()
+const express = require('express')
+const mongoose = require('mongoose')
 const connectionString = process.env.CONNECTION_STRING
 const port = process.env.PORT
-const TaqvimModel = require("./models/taqvim")
+const TaqvimModel = require('./models/taqvim')
 const app = express()
-const { DateTime } = require("luxon")
-const present = require("./Router/present")
-
+const { DateTime } = require('luxon')
+const present = require('./Router/present')
+const cors = require('cors')
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 mongoose.connect(connectionString, {
@@ -16,27 +17,27 @@ mongoose.connect(connectionString, {
   useCreateIndex: true,
 })
 
-app.use("/api/present", present)
+app.use('/api/present', present)
 
-app.get("/", (req, res) => {
+app.get('/', (req, res) => {
   res.send(
     "Welcome to our API checkout our <a href='https://t.me/muslimtaqvimapi'> Telegram Channel </a>"
   )
 })
 
-app.get("/api/monthly", async (req, res) => {
+app.get('/api/monthly', async (req, res) => {
   if (!req.body.region && !req.query.region) {
     res.status(403)
     return res.json({
-      status: "error",
-      message: "Bad request. You must provide region value",
+      status: 'error',
+      message: 'Bad request. You must provide region value',
     })
   }
   if (!req.body.month && !req.query.month) {
     res.status(403)
     return res.json({
-      status: "error",
-      message: "Bad request. You must provide valid month value",
+      status: 'error',
+      message: 'Bad request. You must provide valid month value',
     })
   }
   let region = req.body.region ?? req.query.region
@@ -50,7 +51,7 @@ app.get("/api/monthly", async (req, res) => {
   res.json(resData)
 })
 
-app.get("/api/weekly", async (req, res) => {
+app.get('/api/weekly', async (req, res) => {
   if (
     (!req.body.region && !req.query.region) ||
     (!req.body.month && !req.query.month) ||
@@ -58,7 +59,7 @@ app.get("/api/weekly", async (req, res) => {
   ) {
     res.status(403)
     return res.send(
-      "You must provide valid region and month value on json/www-url-encoded request body or in query"
+      'You must provide valid region and month value on json/www-url-encoded request body or in query'
     )
   }
   let region = req.body.region ?? req.query.region
@@ -86,18 +87,18 @@ app.get("/api/weekly", async (req, res) => {
   }
 })
 
-app.get("/api/thisweek", async (req, res) => {
+app.get('/api/thisweek', async (req, res) => {
   if (!req.body.region && !req.query.region) {
     res.status(403)
     return res.send(
-      "You must provide valid region and month value on json/www-url-encoded request body or in query"
+      'You must provide valid region and month value on json/www-url-encoded request body or in query'
     )
   }
   let region = req.body.region ?? req.query.region
   let now = DateTime.now()
   let month = now.toObject().month
-  let from_day = now.startOf("week").toObject().day
-  let to_day = now.endOf("week").toObject().day
+  let from_day = now.startOf('week').toObject().day
+  let to_day = now.endOf('week').toObject().day
 
   try {
     let data = await TaqvimModel.find(
@@ -119,7 +120,7 @@ app.get("/api/thisweek", async (req, res) => {
   }
 })
 
-app.get("/api/daily", async (req, res) => {
+app.get('/api/daily', async (req, res) => {
   if (
     (!req.body.region && !req.query.region) ||
     (!req.body.month && !req.query.month) ||
@@ -127,7 +128,7 @@ app.get("/api/daily", async (req, res) => {
   ) {
     res.status(403)
     return res.send(
-      "You must provide valid region and month value on json/www-url-encoded request body or in query"
+      'You must provide valid region and month value on json/www-url-encoded request body or in query'
     )
   }
   let region = req.body.region ?? req.query.region

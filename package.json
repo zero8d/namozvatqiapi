@@ -9,10 +9,10 @@
   "author": "Zero8D",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "luxon": "^2.0.2",
     "mongoose": "^5.13.7"
-  },
-  "devDependencies": {}
+  }
 }
