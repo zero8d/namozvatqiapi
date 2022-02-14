@@ -18,10 +18,9 @@ router.get('/week', async (req, res) => {
       {
         region: region,
         $and: [{ date: { $gte: from_date } }, { date: { $lte: to_date } }],
-        $orderby: { date: 1 },
       },
       { _id: 0, __v: 0, month: 0, day: 0 }
-    )
+    ).sort('date')
     let resData = data.map(({ weekday, date, times, region, hijri_date }) => {
       return {
         region,
