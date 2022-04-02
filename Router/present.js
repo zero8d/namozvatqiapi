@@ -10,6 +10,7 @@ router.get('/week', async (req, res) => {
     )
   }
   let region = req.body.region ?? req.query.region
+  region = capitalize(region)
   let now = DateTime.now()
   let from_date = now.startOf('week').toISODate()
   let to_date = now.endOf('week').toISODate()
@@ -43,7 +44,8 @@ router.get('/day', async (req, res) => {
       'You must provide valid region and month value on json/www-url-encoded request body or in query'
     )
   }
-  const region = req.body.region ?? req.query.region
+  let region = req.body.region ?? req.query.region
+  region = capitalize(region)
   try {
     let date = DateTime.now().toISODate()
     let dbData = await TaqvimModel.findOne(
@@ -65,5 +67,9 @@ router.get('/day', async (req, res) => {
     console.log(error)
   }
 })
+
+function capitalize(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
+}
 
 module.exports = router
