@@ -3,10 +3,12 @@
 Namoz vaqtlarini bilish mumkin bo'lgan API. Ma'lumotlar islom.uz saytidan olingan.
 Serverga request ni json shaklida jo'nating.
 
-| API Endpoints  | description                                              |
-| -------------- | -------------------------------------------------------- |
-| `/api/monthly` | Bir oylik ma'lumotni obyeklar massivi sifatida qaytaradi |
-| `/api/daily`   | Bir kunlik ma'lumotni obyekt sifatida qaytaradi          |
+| API Endpoints       | description                                              |
+| ------------------- | -------------------------------------------------------- |
+| `/api/monthly`      | Bir oylik ma'lumotni obyeklar massivi sifatida qaytaradi |
+| `/api/daily`        | Bir kunlik ma'lumotni obyekt sifatida qaytaradi          |
+| `/api/present/day`  | Request jonatilgan kun boyicha malumot qaytaradi         |
+| `/api/present/week` | Request jonatilgan hafta boyicha malumot qaytaradi       |
 
 | request body element | description                                              |
 | -------------------- | -------------------------------------------------------- |
@@ -16,23 +18,39 @@ Serverga request ni json shaklida jo'nating.
 
 ## Example request
 
-`/api/monthly` endpoint uchun
+[GET] `/api/monthly` endpoint uchun
 
-```JSON
-{
-  "region": "Toshkent",
-  "month": 9
-}
-```
+| Parameter | value       |
+| --------- | ----------- |
+| `region`  | "Toshkent", |
+| `month`   | 9           |
 
-`/api/daily` endpoint uchun
+final: `/api/monthly?region=Toshkent&month=9`
 
-```JSON
-{
-  "region": "Toshkent",
-  "month": 9,
-  "day": 1
-}
-```
+[GET] `/api/daily` endpoint uchun
+
+| Parameter | value      |
+| --------- | ---------- |
+| `region`  | "Toshkent" |
+| `month`   | 9          |
+| `day`     | 1          |
+
+final: `/api/daily?region=Toshkent&month=9&day=1`
+
+[GET] `/api/present/day` endpoint uchun
+
+| Parameter | value      |
+| --------- | ---------- |
+| `region`  | "Toshkent" |
+
+final: `/api/present/day?region=Toshkent`
+
+[GET] `/api/present/week` endpoint uchun
+
+| Parameter | value      |
+| --------- | ---------- |
+| `region`  | "Toshkent" |
+
+final: `/api/present/week?region=Toshkent`
 
 ### Author: [Zero8D](https://t.me/Zero_8D)
