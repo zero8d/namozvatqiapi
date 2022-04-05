@@ -1,7 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
-const index = require('./router/index')
+const api = require('./router/api')
 const http = require('http')
 const app = express()
 const httpServer = http.createServer(app)
@@ -16,6 +16,11 @@ mongoose.connect(connectionString, {
   useCreateIndex: true,
 })
 
-app.use('/', index)
+app.get('/', res => {
+  res.send(
+    "Welcome to our API checkout our <a href='https://t.me/muslimtaqvimapi'> Telegram Channel </a><br/>"
+  )
+})
+app.use('/api', api)
 
-httpServer.listen()
+httpServer.listen(3000)
