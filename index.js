@@ -6,6 +6,7 @@ const http = require('http')
 const app = express()
 const httpServer = http.createServer(app)
 const connectionString = process.env.CONNECTION_STRING
+const PORT = process.env.PORT || undefined
 
 app.use(cors())
 app.use(express.json())
@@ -23,4 +24,4 @@ app.get('/', res => {
 })
 app.use('/api', api)
 
-httpServer.listen(3000)
+httpServer.listen(PORT)
