@@ -55,7 +55,7 @@ final: `/api/present/week?region=Toshkent`
 
 API so'rovlari:
 
-Bugungi namoz vatlarini olish uchun: https://islomapi.uz/api/present/day?region=Toshkent
+Bugungi namoz vaqtlarini olish uchun: https://islomapi.uz/api/present/day?region=Toshkent
 
 Shu hafta uchun namoz taqvimi olish uchun: https://islomapi.uz/api/present/week?region=Toshkent
 
