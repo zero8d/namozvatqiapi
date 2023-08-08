@@ -63,4 +63,4 @@ Bir kun uchun namoz taqvimini olish uchun: https://islomapi.uz/api/daily?region=
 
 Bir oylik namoz taqvimini olish uchun: https://islomapi.uz/api/monthly?region=Toshkent&month=4
 
-### Author: [Zero8D](https://t.me/Zero_8D)
+### Author: [@Zero8D](https://t.me/Zero_8D)
